@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import './transaction.dart';
 
@@ -32,6 +33,11 @@ class MyHomePage extends StatelessWidget {
     )
   ];
 
+  // late String titleInput;
+  // late String amountInput;
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
+
   MyHomePage({Key? key}) : super(key: key);
 
   @override
@@ -41,7 +47,7 @@ class MyHomePage extends StatelessWidget {
         title: const Text('Flutter App'),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container(
@@ -50,6 +56,37 @@ class MyHomePage extends StatelessWidget {
               elevation: 5,
               color: Colors.blue,
               child: Text('CHART!'),
+            ),
+          ),
+          Card(
+            elevation: 5,
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  TextField(
+                    decoration: InputDecoration(labelText: 'Title'),
+                    controller: titleController,
+                    // onChanged: (val) {
+                    //   titleInput = val;
+                    // },
+                  ),
+                  TextField(
+                    decoration: InputDecoration(labelText: 'Amount'),
+                    controller: amountController,
+                    // onChanged: (val) => amountInput = val,
+                  ),
+                  TextButton(
+                    style: TextButton.styleFrom(primary: Colors.purple),
+                    child: const Text('Add Transaction'),
+                    onPressed: () {
+                      print(titleController.text);
+                      print(amountController.text);
+                    },
+                  )
+                ],
+              ),
             ),
           ),
           Column(
@@ -84,7 +121,7 @@ class MyHomePage extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        tx.date.toString(),
+                        DateFormat.yMMMd().format(tx.date),
                         style: const TextStyle(
                           color: Colors.grey,
                         ),
