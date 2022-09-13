@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 import '../models/transaction.dart';
 
@@ -33,41 +32,16 @@ class TransactionList extends StatelessWidget {
             )
           : ListView.builder(
               itemBuilder: (ctx, index) {
-                return Card(
-                  child: Row(children: [
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 15),
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                        color: Theme.of(context).primaryColor,
-                        width: 2,
-                      )),
+                return ListTile(
+                  leading: CircleAvatar(
+                    radius: 30,
+                    child: Padding(
                       padding: const EdgeInsets.all(10),
-                      child: Text(
-                        '\$${transactions[index].amount.toStringAsPrecision(4)}',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: Theme.of(context).primaryColor),
+                      child: FittedBox(
+                        child: Text('\$${transactions[index].amount}'),
                       ),
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          transactions[index].title,
-                          style: Theme.of(context).textTheme.headline6,
-                        ),
-                        Text(
-                          DateFormat.yMMMd().format(transactions[index].date),
-                          style: const TextStyle(
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ]),
+                  ),
                 );
               },
               itemCount: transactions.length,
